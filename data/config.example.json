@@ -1,0 +1,50 @@
+{
+  "sshUser": "",
+  "defaultRemoteHost": "127.0.0.1",
+  "defaultRemotePort": null,
+  "machines": [
+    {
+      "id": "macmini-01",
+      "hostname": "macmini-01",
+      "label": "Mac mini 01",
+      "role": "mac mini",
+      "tailscaleIp": "100.x.y.1",
+      "sshUser": "",
+      "services": [
+        {
+          "name": "OpenClaw Gateway",
+          "remoteHost": "127.0.0.1",
+          "remotePort": null,
+          "preferredLocalPort": null
+        }
+      ]
+    },
+    {
+      "id": "macmini-02",
+      "hostname": "macmini-02",
+      "label": "Mac mini 02",
+      "role": "mac mini",
+      "tailscaleIp": "100.x.y.2",
+      "sshUser": "",
+      "services": []
+    },
+    {
+      "id": "macmini-03",
+      "hostname": "macmini-03",
+      "label": "Mac mini 03",
+      "role": "mac mini",
+      "tailscaleIp": "100.x.y.3",
+      "sshUser": "",
+      "services": []
+    },
+    {
+      "id": "macbook-pro",
+      "hostname": "macbook-pro",
+      "label": "MacBook Pro",
+      "role": "macbook pro",
+      "tailscaleIp": "100.x.y.4",
+      "sshUser": "",
+      "services": []
+    }
+  ]
+}

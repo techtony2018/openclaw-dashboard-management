@@ -1,0 +1,9 @@
+data/*
+!data/config.example.json
+known_hosts
+known_hosts.*
+node_modules/
+.DS_Store
+*.swp
+.env
+.env.*

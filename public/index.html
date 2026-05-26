@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OpenClaw Management System</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>OpenClaw Management System <span id="versionBadge" class="version-badge">v1.02</span></h1>
+        </div>
+        <div class="actions">
+          <button id="discoverBtn" type="button">Discover</button>
+          <button id="refreshBtn" type="button">Refresh</button>
+        </div>
+      </header>
+
+      <section class="status-strip" aria-live="polite">
+        <div>
+          <span class="metric" id="machineCount">0</span>
+          <span>Machines</span>
+        </div>
+        <div>
+          <span class="metric" id="tunnelCount">0</span>
+          <span>Tunnels</span>
+        </div>
+        <div class="notice" id="notice">Ready</div>
+      </section>
+
+      <section class="panel settings-panel">
+        <div class="panel-heading">
+          <h2>Defaults</h2>
+          <span>Used for discovery, new machines, and tunnels without a machine-specific user</span>
+        </div>
+        <form id="settingsForm" class="settings-form">
+          <label>
+            Default SSH User
+            <input name="sshUser" id="defaultSshUser" placeholder="Set SSH user" required />
+          </label>
+          <label>
+            Default Remote Host
+            <input name="defaultRemoteHost" id="defaultRemoteHost" value="127.0.0.1" required />
+          </label>
+          <label>
+            Default Remote Port
+            <input
+              name="defaultRemotePort"
+              id="defaultRemotePort"
+              type="number"
+              min="1"
+              max="65535"
+              placeholder="Gateway port"
+              required
+            />
+          </label>
+          <label class="checkbox-label">
+            <input name="applyToMachines" type="checkbox" checked />
+            Apply SSH user to existing machines
+          </label>
+          <button type="submit">Save Defaults</button>
+        </form>
+      </section>
+
+      <section class="workspace-grid">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Machines</h2>
+            <span>Tailscale IP + SSH</span>
+          </div>
+          <div id="machineList" class="list empty-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2 id="machineFormTitle">Add Machine</h2>
+            <span id="machineFormHint">Add your 3 Mac minis and 1 MacBook Pro here</span>
+          </div>
+          <form id="machineForm" class="form-grid">
+            <label>
+              Display Name
+              <input name="label" placeholder="macmini-01" required />
+            </label>
+            <label>
+              Hostname
+              <input name="hostname" placeholder="macmini-01" required />
+            </label>
+            <label>
+              Tailscale IP
+              <input name="tailscaleIp" placeholder="100.x.y.z" required />
+            </label>
+            <label>
+              SSH User
+              <input name="sshUser" placeholder="SSH user" required />
+            </label>
+            <label>
+              Role
+              <select name="role">
+                <option value="mac mini">mac mini</option>
+                <option value="macbook pro">macbook pro</option>
+                <option value="mac">mac</option>
+              </select>
+            </label>
+            <button id="saveMachineBtn" type="submit">Save Machine</button>
+            <button id="cancelEditMachineBtn" class="ghost" type="button" hidden>Cancel Edit</button>
+          </form>
+        </div>
+
+        <div class="panel wide">
+          <div class="panel-heading">
+            <h2>SSH Port Forwarding</h2>
+            <span>Tokens stay on the target machine; users open localhost only</span>
+          </div>
+          <form id="tunnelForm" class="tunnel-form">
+            <label>
+              Machine
+              <select name="machineId" id="machineSelect" required></select>
+            </label>
+            <label>
+              Name
+              <input name="name" placeholder="OpenClaw Gateway" />
+            </label>
+            <label>
+              Local Port
+              <input name="localPort" type="number" min="1" max="65535" placeholder="Local port" required />
+            </label>
+            <label>
+              Remote Host
+              <input name="remoteHost" value="127.0.0.1" required />
+            </label>
+            <label>
+              Remote Port
+              <input name="remotePort" type="number" min="1" max="65535" placeholder="Gateway port" required />
+            </label>
+            <button type="submit">Start Tunnel</button>
+          </form>
+          <div id="tunnelList" class="list tunnel-list empty-list"></div>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
